@@ -2,6 +2,9 @@ package com.google;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -19,7 +22,9 @@ class VideoLibrary {
   VideoLibrary() {
     this.videos = new HashMap<>();
     try {
-      File file = new File(this.getClass().getResource("/videos.txt").getFile());
+      String filePath = URLDecoder.decode(this.getClass().getResource("/videos.txt").toString(), StandardCharsets.UTF_8.name());
+      filePath = filePath.substring(6);
+      File file = new File(filePath);
 
       Scanner scanner = new Scanner(file);
       while (scanner.hasNextLine()) {
@@ -38,6 +43,10 @@ class VideoLibrary {
       }
     } catch (FileNotFoundException e) {
       System.out.println("Couldn't find videos.txt");
+      e.printStackTrace();
+    } catch (UnsupportedEncodingException e)
+    {
+      System.out.println("You are using an Unsupported Encoding type. ");
       e.printStackTrace();
     }
   }
