@@ -30,4 +30,10 @@ class Video {
   List<String> getTags() {
     return tags;
   }
+
+  // Return the title, video id, and tags of the video in a formatted string. 
+  public String toString() {
+    return title + " (" + videoId + ") [" + String.join(" ", tags) + "]";
+  }
+
 }
