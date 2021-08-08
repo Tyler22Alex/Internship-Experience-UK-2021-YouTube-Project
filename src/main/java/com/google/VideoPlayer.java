@@ -12,14 +12,11 @@ public class VideoPlayer {
   private Video currentVideo;
   private boolean paused;
 
-  private List<VideoPlaylist> playlists = new ArrayList<>();
-
   public VideoPlayer() {
     this.videoLibrary = new VideoLibrary();
   }
 
   public void numberOfVideos() {
-
     System.out.printf("%s videos in the library%n", videoLibrary.getVideos().size());
   }
 
