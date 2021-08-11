@@ -12,21 +12,24 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-/**
- * A class used to represent a Video Library.
- */
+/** A class used to represent a Video Library. */
 class VideoLibrary {
 
+  // The videos in this library gotten from a text file. 
   private final HashMap<String, Video> videos;
 
+  /** Create a new video library with all the videos in the text file. */
   VideoLibrary() {
     this.videos = new HashMap<>();
+
     try {
+      // Get the file path and file for the videos text file. 
       String filePath = URLDecoder.decode(this.getClass().getResource("/videos.txt").toString(), StandardCharsets.UTF_8.name());
       filePath = filePath.substring(6);
       File file = new File(filePath);
 
       Scanner scanner = new Scanner(file);
+
       while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
         String[] split = line.split("\\|");
@@ -34,8 +37,7 @@ class VideoLibrary {
         String id = split[1].strip();
         List<String> tags;
         if (split.length > 2) {
-          tags = Arrays.stream(split[2].split(",")).map(String::strip).collect(
-              Collectors.toList());
+          tags = Arrays.stream(split[2].split(",")).map(String::strip).collect(Collectors.toList());
         } else {
           tags = new ArrayList<>();
         }
@@ -46,19 +48,19 @@ class VideoLibrary {
       e.printStackTrace();
     } catch (UnsupportedEncodingException e)
     {
-      System.out.println("You are using an Unsupported Encoding type. ");
+      System.out.println("You are using an unsupported encoding type. ");
       e.printStackTrace();
     }
   }
 
+  /** Return an array list of the video titles. */
   List<Video> getVideos() {
     return new ArrayList<>(this.videos.values());
   }
 
-  /**
-   * Get a video by id. Returns null if the video is not found.
-   */
+  /** Get a video by id. Returns null if the video is not found. */
   Video getVideo(String videoId) {
     return this.videos.get(videoId);
   }
+  
 }

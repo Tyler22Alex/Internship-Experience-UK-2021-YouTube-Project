@@ -10,6 +10,7 @@ class Video {
   private final String videoId;
   private final List<String> tags;
 
+  /** Create a new video object with the given parameters. */
   Video(String title, String videoId, List<String> tags) {
     this.title = title;
     this.videoId = videoId;
